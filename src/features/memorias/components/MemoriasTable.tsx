@@ -43,6 +43,8 @@ export default function MemoriasTable({
         return "default";
       case "EXTRACTING":
         return "secondary";
+      case "UPLOADED":
+        return "outline";
       case "FAILED":
         return "destructive";
       default:
@@ -55,6 +57,8 @@ export default function MemoriasTable({
         return "Completada";
       case "EXTRACTING":
         return "En progreso";
+      case "UPLOADED":
+        return "Subida";
       case "FAILED":
         return "Error";
       default:
