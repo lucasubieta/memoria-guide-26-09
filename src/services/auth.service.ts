@@ -1,4 +1,5 @@
 import { HttpClient } from "@/lib/http/client";
+import { API_BASE_URL } from "@/config/env";
 
 export interface LoginRequest {
   email: string;
@@ -26,8 +27,8 @@ class AuthService {
   private client: HttpClient;
 
   constructor() {
-    // Configurar la URL base del backend
-    this.client = new HttpClient(process.env.REACT_APP_API_URL || "http://localhost:3001/api");
+    // Usar la configuración de API ya establecida
+    this.client = new HttpClient(API_BASE_URL);
   }
 
   async login(credentials: LoginRequest): Promise<LoginResponse> {
