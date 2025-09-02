@@ -1,5 +1,6 @@
 import { HttpClient } from "@/lib/http/client";
-import { API_BASE_URL } from "@/config/env";
+import { API_BASE_URL, USE_MOCK } from "@/config/env";
+import { MockAuthService } from "./auth.mock";
 
 export interface LoginRequest {
   email: string;
@@ -25,13 +26,19 @@ export interface User {
 
 class AuthService {
   private client: HttpClient;
+  private mockService: MockAuthService;
 
   constructor() {
     // Usar la configuración de API ya establecida
     this.client = new HttpClient(API_BASE_URL);
+    this.mockService = new MockAuthService();
   }
 
   async login(credentials: LoginRequest): Promise<LoginResponse> {
+    if (USE_MOCK) {
+      return this.mockService.login(credentials);
+    }
+    
     const response = await this.client.post<LoginResponse>("/auth/login", credentials);
     
     // Guardar el token en localStorage
@@ -43,6 +50,10 @@ class AuthService {
   }
 
   async logout(): Promise<void> {
+    if (USE_MOCK) {
+      return this.mockService.logout();
+    }
+    
     try {
       await this.client.post("/auth/logout");
     } finally {
@@ -52,6 +63,10 @@ class AuthService {
   }
 
   async getCurrentUser(): Promise<User> {
+    if (USE_MOCK) {
+      return this.mockService.getCurrentUser();
+    }
+    
     const token = this.getToken();
     if (!token) {
       throw new Error("No token found");
@@ -61,6 +76,10 @@ class AuthService {
   }
 
   async refreshToken(): Promise<LoginResponse> {
+    if (USE_MOCK) {
+      return this.mockService.refreshToken();
+    }
+    
     return this.client.post<LoginResponse>("/auth/refresh");
   }
 
