@@ -88,6 +88,12 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-8">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-foreground">Panel de control</h1>
+        <p className="text-muted-foreground mt-2">
+        </p>
+      </div>
       <div className="space-y-4">
         <h2 className="text-xl font-medium text-foreground">
           Estadísticas del sistema

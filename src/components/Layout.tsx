@@ -18,9 +18,19 @@ export default function Layout() {
 
   const isActive = (path: string) => location.pathname === path;
 
-  // Navegación según el rol del usuario - Deshabilitada
+  // Navegación según el rol del usuario
   const getNavigation = () => {
-    return []; // Sin navegación para ningún rol
+    if (hasRole("coordinador")) {
+      return [
+        { name: "Panel de Control", href: "/dashboard", icon: BookOpen },
+        { name: "Titulaciones", href: "/memorias", icon: FileText },
+      ];
+    } else if (hasRole("profesor")) {
+      return [
+        { name: "Titulaciones", href: "/memorias", icon: FileText },
+      ];
+    }
+    return [];
   };
 
   const navigation = getNavigation();
