@@ -27,7 +27,6 @@ export default function Layout() {
       ];
     } else if (hasRole("profesor")) {
       return [
-        { name: "Profesores", href: "/profesores", icon: Users },
         { name: "Titulaciones", href: "/memorias", icon: FileText },
       ];
     }

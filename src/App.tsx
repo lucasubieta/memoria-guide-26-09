@@ -43,7 +43,7 @@ function RoleBasedRedirect() {
   if (user?.role === "coordinador") {
     return <Navigate to="/dashboard" replace />;
   } else if (user?.role === "profesor") {
-    return <Navigate to="/profesores" replace />;
+    return <Navigate to="/memorias" replace />;
   }
   
   return <Navigate to="/dashboard" replace />;
